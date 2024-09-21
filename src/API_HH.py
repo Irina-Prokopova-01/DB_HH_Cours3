@@ -90,9 +90,3 @@ class HH(Parser):
         """Метод возвращает обработанный по заданным критериям список вакансий."""
         return self.vacancies_for_base
 
-
-if '__name__' == '__main__':
-    hh = HH()
-    hh.load_vacancies(1,2,3)
-    print(hh.load_vacancies('1'))
-    print(*hh.vacancies_for_base)
