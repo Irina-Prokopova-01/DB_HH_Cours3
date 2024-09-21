@@ -72,6 +72,7 @@ class HH(Parser):
                     area = vacancie["area"]["name"]
                 else:
                     area = "Не указано."
+                print(vacancie)
                 self.vacancies_for_base.append(
                     {
                         "employer": employer,
@@ -84,6 +85,22 @@ class HH(Parser):
                     }
                 )
 
+
     def export_vac_list(self) -> list:
         """Метод возвращает обработанный по заданным критериям список вакансий."""
         return self.vacancies_for_base
+
+
+if '__name__' == '__main__':
+    hh = HH()
+    hh.load_vacancies('Junior Python Developer')
+    # print(hh.vacancies_short)
+    # hh.load_vacancies("менеджер")
+    # hh_vacancies = hh.export_vac_list()
+    # print(*hh.export_vac_list())
+    # print(hh.load_vacancies('менеджер'))
+    # print(hh_vacancies)
+    # vac_1 = Vacancy("Менеджер", "link.ru", "Продажа кондиционеров.", "Без опыта работы.", "Москва", 50000)
+    # print(vac_1.vac_full())
+    # print(list(map(str, vac_1)))
+    print(*hh.vacancies_for_base)
