@@ -6,7 +6,7 @@ from src.classes_abstract import CreatorDB
 class DBCreator(CreatorDB):
     """Класс по работе с базой данных.
     Класс позволяет создавать базу данных с заданным названием,
-    а также создавать таблицы в сохданной базе данных.
+    а также создавать таблицы в созданной базе данных.
     Класс является дочерним классом класса CreatorDB."""
 
     def __init__(self, db_name: str = "test_base") -> None:
@@ -29,7 +29,6 @@ class DBCreator(CreatorDB):
         finally:
             cur.close()
             conn.close()
-
     def create_table(self) -> None:
         """Метод создаёт таблицы с заданными названиями."""
 
@@ -60,3 +59,7 @@ class DBCreator(CreatorDB):
         finally:
             cur.close()
             conn.close()
+
+if '__name__' == '__main__':
+    db = DBCreator('HH_emp')
+    db.create_db()

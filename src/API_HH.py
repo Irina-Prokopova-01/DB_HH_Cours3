@@ -28,16 +28,19 @@ class HH(Parser):
         self.params = {"employer_id": "", "area": 113, "page": 0, "per_page": 100}
         self.vacancies = []
         self.vacancies_for_base = []
+        # self.fullname = os.path.join(DATA_DIR, filename)
+        print(self.vacancies)
 
     def load_vacancies(self, id: list[Any]) -> None:
         """Метод загружает вакансии с сервиса HH. Формирует из загруженных данных список объектов
         вакансий с полями: название, ссылка, зарплата, описание, требования, место."""
         self.params["employer_id"] = id
-        while self.params.get("page") != 20:
+        while self.params.get("page") != 2:
             response = requests.get(self.url, headers=self.headers, params=self.params)
             vacancies = response.json()["items"]
             self.vacancies.extend(vacancies)
             self.params["page"] += 1
+            # print(vacancies)
         for vacancie in self.vacancies:
             if vacancie["employer"]["name"]:
                 employer = vacancie["employer"]["name"]
@@ -72,7 +75,7 @@ class HH(Parser):
                     area = vacancie["area"]["name"]
                 else:
                     area = "Не указано."
-                print(vacancie)
+                # print(vacancie)
                 self.vacancies_for_base.append(
                     {
                         "employer": employer,
@@ -89,4 +92,10 @@ class HH(Parser):
     def export_vac_list(self) -> list:
         """Метод возвращает обработанный по заданным критериям список вакансий."""
         return self.vacancies_for_base
+
+
+if __name__ == "__main__":
+    hh = HH()
+    hh.load_vacancies([1736014])
+    print(*hh.vacancies_for_base)
 

@@ -2,6 +2,7 @@ from src.data_base import DBCreator
 from src.data_base_connect import DBFiller
 from user_settings import employers_list
 from src.DBManager import DBManager
+from src.API_HH import HH
 
 
 def main_func():
